@@ -1,0 +1,69 @@
+div#room-owner-view{
+    position: absolute;
+    left:0px;
+    bottom: 0px;
+    height: 90%;
+    width: 80%;
+    background-color: crimson;
+    
+    display: flex;
+    align-items: center;
+}
+
+#question-creation-form{
+    width: 45%;
+    height: 100%;
+    background-color: salmon;
+}
+
+#results-and-control-panel{
+    width: 35%;
+    height: 100%;
+    background-color: brown;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#member-management-view{
+    width: 20%;
+    height: 100%;
+    background-color: cyan;
+}
+
+#members {
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+    padding: 10px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
+#results{
+    height:50%;
+    width: 100%;
+    background-color: darkgreen;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#control-panel{
+    height:50%;
+    width: 100%;
+    background-color: darkblue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.owner-label{
+    width: 100%;
+    text-align: center;
+    background-color: darkorchid;
+    margin: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}

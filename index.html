@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="room-style.css">
+    <link rel="stylesheet" href="owner-styles.css">
+    <script src="owner.js" defer></script>
+    <script src="requests.js" defer></script>
+    <script src="flow.js" defer></script>
+</head>
+
+
+<body>
+    <div id="error-display"></div>
+    <div class="centered-box" id="room-options">
+        <h1 class="welcome-tag"> Welcome to BuzzIt!</h1>
+        <button class="main-button" id="join-room-button"> Join a Room </button>
+        <button class="main-button" id="create-new-room-button"> Create New Room</button>
+    </div>
+
+    <div class="centered-box" id="create-join-room">
+        <h1 class="welcome-tag"> Enter (New) Room Code:</h1>
+        <form id="room-submission-form">
+            <input id="room-code-input" type="text" placeholder="Enter Code" />
+            <input id="room-code-submit" type="submit" value="Continue" />
+        </form>
+    </div>
+
+    <div class="centered-box" id="user-create-box">
+        <h1 class="welcome-tag">Choose a Name:</h1>
+        <form id="name-submission-form">
+            <input id="name-input" type="text" placeholder="Name" maxlength="12" />
+            <input id="name-submit" type="submit" value="Enter Room" />
+        </form>
+    </div>
+
+    <div id="room-view">
+        <div id="room-info-banner">
+            <div id="room-code-display">
+                Code: SDFSI
+            </div>
+
+            <div id="room-topic-display">
+                Section 10 Quiz Time!
+            </div>
+
+            <div id="name-display">
+                Bill Feng
+            </div>
+        </div>
+
+        <div id="question-view">
+            <div id="question-display">
+                <h1 id="question-value">This is the Question How long can it get!!</h1>
+                <div id="question-image">
+                    <img src="https://thumbs.dreamstime.com/b/fire-letter-p-your-design-50682068.jpg" height="300">
+                </div>
+            </div>
+            <div id="options-display">
+                <button class="option-button">Option 1</button>
+                <button class="option-button">Option 2</button>
+            </div>
+        </div>
+
+        <div id="room-owner-view">
+            <div id="question-creation-form">
+                <h4 class="owner-label" id="create-question-label"> Create a Question</h4>
+                <div id="create-question">
+
+                </div>
+
+            </div>
+
+            <div id="results-and-control-panel">
+                <div id="results">
+                    <h4 class="owner-label" id="question-results-label"> Question Results</h4>
+                    <div id="results-box">
+                        <div id="summary-stats">
+
+                        </div>
+                        <div id="users-responded">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div id="control-panel">
+                    <h4 class="owner-label" id="control-panel-label"> Control Panel </h4>
+                    <h4> Room Status: <span>Awaiting Question</span></h4>
+
+                </div>
+            </div>
+
+            <div id="member-management-view">
+                <h4 class="owner-label" id="member-management-label"> Member Management </h4>
+                <div id="members">
+                    <div class="member" dataset-id="1">1/16 -<span class="kick-member">❌</span> Bob</div>
+                    <div class="member" dataset-id="1">1/16 -<span class="kick-member">❌</span> Bob</div>
+                    <div class="member" dataset-id="1">1/16 -<span class="kick-member">❌</span> Bob</div>
+                    <div class="member" dataset-id="1">1/16 -<span class="kick-member">❌</span> Bob</div>
+                    <div class="member" dataset-id="1">1/16 -<span class="kick-member">❌</span> Bob</div>
+                    <div class="member" dataset-id="1">1/16 -<span class="kick-member">❌</span> Bob</div>
+                    <div class="member" dataset-id="1">1/16 -<span class="kick-member">❌</span> Bob</div>
+                    <div class="member" dataset-id="1">1/16 -<span class="kick-member">❌</span> Bob</div>
+                    <div class="member" dataset-id="1">1/16 -<span class="kick-member">❌</span> Bob</div>
+                    <div class="member" dataset-id="1">1/16 -<span class="kick-member">❌</span> Bob</div>
+                    <div class="member" dataset-id="1">1/16 -<span class="kick-member">❌</span> Bob</div>
+
+                </div>
+            </div>
+        </div>
+
+        <div id="chat-view">
+            <div id="messages">
+                <div id="messages-box">
+                    <div class="message">
+                        dfjsofsidjf
+                    </div>
+                    <div class="message">
+                        dfjsofsidjf
+                    </div>
+                    <div class="message">
+                        dfjsofsidjf
+                    </div>
+                    <div class="message">
+                        <span class="sender">Bill: </span>
+                        dfjsofsidjffkda'f ld'fjd'fljd 'fjdf'adlf j'asdlfj 'asdlf
+                        jaldl'ljfljd'fljsdsljd'ljaadsj'ds;fsa';';fldj'flsjdf'ljasdf;djf;sldj
+                    </div>
+                    <div class="message">
+                        <span class="sender">Joe: </span>Hi, this is a message from joe \n How do you do?
+                    </div>
+                    <div class="message">
+                        dfjsofsidjf
+                    </div>
+                    <div class="message">
+                        dfjsofsidjf
+                    </div>
+                    <div class="message">
+                        dfjsofsidjf
+                    </div>
+                    <div class="message">
+                        dfjsofsidjf
+                    </div>
+                    <div class="message">
+                        dfjsofsidjf
+                    </div>
+                    <div class="message">
+                        dfjsofsidjf
+                    </div>
+                    <div class="message">
+                        dfjsofsidjf
+                    </div>
+                    <div class="message">
+                        dfjsofsidjf
+                    </div>
+                    <div class="message">
+                        dfjsofsidjf
+                    </div>
+                    <div class="message">
+                        dfjsofsidjf
+                    </div>
+                    <div class="message">
+                        dfjsofsidjf
+                    </div>
+                    <div class="message">
+                        dfjsofsidjf
+                    </div>
+                    <div class="message">
+                        dfjsofsidjf
+                    </div>
+                    <div class="message">
+                        dfjsofsidjf
+                    </div>
+                    <div class="message">
+                        dfjsofsidjf
+                    </div>
+                    <div class="message">
+                        dfjsofsidjf
+                    </div>
+                    <div class="message">
+                        dfjsofsidjf
+                    </div>
+                    <div class="message">
+                        dfjsofsidjf
+                    </div>
+                    <div class="message">
+                        dfjsofsidjf
+                    </div>
+                    <div class="message">
+                        dfjsofsidjf
+                    </div>
+                    <div class="message">
+                        dfjsofsidjf
+                    </div>
+                    <div class="message">
+                        dfjsofsidjf
+                    </div>
+                    <div class="message">
+                        dfjsofsidjf
+                    </div>
+                    <div class="message">
+                        dfjsofsidjf
+                    </div>
+                    <div class="message">
+                        dfjsofsidjf
+                    </div>
+                    <div class="message">
+                        dfjsofsidjf
+                    </div>
+                    <div class="message">
+                        dfjsofsidjf
+                    </div>
+                    <div class="message">
+                        dfjsofsidjf
+                    </div>
+                    <div class="message">
+                        dfjsofsidjf
+                    </div>
+                    <div class="message">
+                        dfjsofsidjf
+                    </div>
+                    <div class="message">
+                        dfjsofsidjf
+                    </div>
+                    <div class="message">
+                        dfjsofsidjf
+                    </div>
+                    <div class="message">
+                        dfjsofsidjf
+                    </div>
+                    <div class="message">
+                        dfjsofsidjf
+                    </div>
+                    <div class="message">
+                        dfjsofsidjf
+                    </div>
+                    <div class="message">
+                        dfjsofsidjf
+                    </div>
+                    <div class="message">
+                        dfjsofsidjf
+                    </div>
+                    <div class="message">
+                        dfjsofsidjf
+                    </div>
+                </div>
+            </div>
+            <div id="chat">
+                <form id="new-message-form">
+                    <textarea id="message-content" placeholder="Enter a message!"></textarea>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+
+</body>
+
+
