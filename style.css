@@ -44,7 +44,6 @@ h1.welcome-tag{
 
 button#join-room-button{
     top: 130px;
-   
 }
 
 button#create-new-room-button{
@@ -71,6 +70,7 @@ input#room-code-submit{
     margin-right: -122px;
     bottom: 20px;
     font-size: 50px;
+    border-radius: 0.5cm;
 }
 input#name-input{
     position:absolute;
@@ -91,6 +91,7 @@ input#name-submit{
     margin-right: -122px;
     bottom: 20px;
     font-size: 30px;
+    border-radius: 0.5cm;
 }
 
 div#room-view{
