@@ -191,14 +191,6 @@ function processNewChatMessage(e) {
     
 }
 
-function newQuestion(questionInfo) {
-
-}
-
-function updateRoomTopic(newTopic) {
-
-}
-
 
 //listeners
 function createEventListeners() {

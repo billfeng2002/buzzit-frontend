@@ -36,7 +36,7 @@ function userRoomView() {
     hideAllUIExcept("room-view")
     document.querySelector("#question-view").style.visibility="visible"
     document.querySelector("#room-owner-view").style.visibility="hidden"
-    setInterval(updateChat,500)
+    //setInterval(updateChat,500)
     updateChat()
 }
 
@@ -44,6 +44,6 @@ function ownerRoomView() {
     hideAllUIExcept("room-view")
     document.querySelector("#question-view").style.visibility="hidden"
     document.querySelector("#room-owner-view").style.visibility="visible"
-    setInterval(updateChat,500)
+    //setInterval(updateChat,500)
     updateChat()
 }
