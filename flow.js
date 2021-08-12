@@ -280,13 +280,13 @@ function processNewQuestion(e) {
     fetch("http://localhost:3000/questions", postOptions).then(r => r.json()).then(j => {
         if (j["message"] == "success") {
             currentQuestion["id"] = j["question_id"]
-            currentQuestion["value"]=questionVal
-            currentQuestion["img"]=image
-            currentQuestion["options"]=options
-            roomStatus="accepting"
+            currentQuestion["value"] = questionVal
+            currentQuestion["img"] = image
+            currentQuestion["options"] = options
+            roomStatus = "accepting"
             updateRoomSettings()
             resetNewQuestionForm()
-            document.querySelector("#stop-accepting-responses").disabled=false
+            document.querySelector("#stop-accepting-responses").disabled = false
         } else {
             alert("question creation failed")
         }
@@ -340,50 +340,52 @@ function resetNewQuestionForm() {
 <div id="submit-container">
     <input id="submit-question-button" type="submit" value="Post Question">
 </div>`
+    document.querySelector("#table-options").addEventListener("click", processAddorRemoveOptions)
 
 }
 
 function processAddorRemoveOptions(e) {
-    if(e.target.matches("#add-option")){
-        let table=document.querySelector("#options-table")
-        let numOptions=table.querySelectorAll(".option-row").length
-        if(numOptions>=10){
+    if (e.target.matches("#add-option")) {
+        console.log("adding row")
+        let table = document.querySelector("#options-table")
+        let numOptions = table.querySelectorAll(".option-row").length
+        if (numOptions >= 10) {
             return;
         }
-        let newRow=document.createElement("tr")
+        let newRow = document.createElement("tr")
         newRow.classList.add("option-row")
-        newRow.innerHTML=`<td>${numOptions+1}</td>
+        newRow.innerHTML = `<td>${numOptions + 1}</td>
                             <td><input type="text"></td>
                             <td><input type="checkbox"></td>`
-                    
+
         table.append(newRow)
     }
-    if(e.target.matches("#remove-option")){
-        let table=document.querySelector("#options-table")
-        let options=table.querySelectorAll(".option-row")
-        let numOptions=options.length
-        if(numOptions>0){
-            options[numOptions-1].remove()
+    if (e.target.matches("#remove-option")) {
+        let table = document.querySelector("#options-table")
+        let options = table.querySelectorAll(".option-row")
+        let numOptions = options.length
+        if (numOptions > 0) {
+            options[numOptions - 1].remove()
         }
     }
 }
 
-function processStartAwait(e){
-    e.target.disabled=true
-    roomStatus="awaiting"
+function processStartAwait(e) {
+    e.target.disabled = true
+    roomStatus = "awaiting"
     updateRoomSettings()
 }
 
-function processUpdateRoomTopic(e){
+function processUpdateRoomTopic(e) {
     e.preventDefault()
-    let newTopic=e.target.querySelector("#new-topic-input").value
-    roomTopic=newTopic
+    let newTopic = e.target.querySelector("#new-topic-input").value
+    roomTopic = newTopic
     updateRoomSettings()
     updateRoomBanner()
     e.target.reset()
 }
 
-function processDeleteRoom(e){
+function processDeleteRoom(e) {
     deleteOptions = {
         method: 'DELETE',
         headers: {
@@ -391,9 +393,9 @@ function processDeleteRoom(e){
             "Accept": 'application/json'
         }
     }
-    fetch("http://localhost:3000/rooms/"+roomId, deleteOptions).then(r=>r.json()).then(j=>{
+    fetch("http://localhost:3000/rooms/" + roomId, deleteOptions).then(r => r.json()).then(j => {
         alert("room deleted")
-    }).catch(()=>{
+    }).catch(() => {
         alert("failed to delete room")
     })
 }
