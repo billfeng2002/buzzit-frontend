@@ -13,7 +13,7 @@ div#room-owner-view{
 #question-creation-form{
     width: 45%;
     height: 100%;
-    background-color: salmon;
+    background-color: rgb(230, 221, 210);
 }
 
 #results-and-control-panel{
@@ -28,7 +28,7 @@ div#room-owner-view{
 #member-management-view{
     width: 20%;
     height: 100%;
-    background-color: cyan;
+    background-color: rgb(230, 221, 210);
 }
 
 #members {
@@ -43,7 +43,7 @@ div#room-owner-view{
 #results{
     height:50%;
     width: 100%;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(230, 221, 210);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -52,7 +52,7 @@ div#room-owner-view{
 #control-panel{
     height:50%;
     width: 100%;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(230, 221, 210);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -62,11 +62,11 @@ div#room-owner-view{
 .owner-label{
     width: 100%;
     text-align: center;
-    background-color: darkorchid;
+    background-color: rgb(70, 218, 218) ;
     margin: 0;
     padding-top: 10px;
     padding-bottom: 10px;
-    outline: 2px solid black;
+    outline: 2px solid grey;
     outline-offset: -2px;
 }
 
