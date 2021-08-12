@@ -15,4 +15,3 @@ let currentQuestion = {
 }
 let lastQuestionId=0
 let isOwner = false
-let submitted=false

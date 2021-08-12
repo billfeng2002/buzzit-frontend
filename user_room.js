@@ -2,6 +2,10 @@ function getAndUseUserRoomInfo() {
     //need room status, topic, question id
     fetch("http://localhost:3000/user_room_info/" + roomId).then(r => r.json()).then(j => {
 
+        if(j["status"]=="closed room"){
+            location.reload()
+            return false
+        }
         if (roomTopic != j["room_topic"]) {
             roomTopic = j["room_topic"]
             updateRoomBanner()
@@ -10,40 +14,73 @@ function getAndUseUserRoomInfo() {
         currentQuestion["id"] = j["current_question_id"]
         roomStatus = j["room_status"]
 
-        if (room_status == "awaiting") {
+        if (roomStatus == "awaiting") {
             defaultView()
-        } else if (room_status == "accepting") {
+        } else if (roomStatus == "accepting") {
             displayQuestion()
         }
     })
 }
 
 function displayQuestion() {
-    if (submitted) {
+    if(!currentQuestion["id"]){
+        defaultView()
+        console.log("bad question, default view")
+        return
+    }
+    if (lastQuestionId != currentQuestion["id"]) {
+        
+        fetch("http://localhost:3000/questions/"+currentQuestion["id"]).then(r=>r.json()).then(j=>{
+            if(j["img"]){
+                currentQuestion["img"]=j["img"]
+                document.querySelector("#question-image").style.display="flex"
+            }else{
+                currentQuestion["img"]=""
+                document.querySelector("#question-image").style.display="none"
+            }
+            currentQuestion["value"]=j["value"]
+            currentQuestion["options"]=j["options"]
 
-    } else {
-        if(lastQuestionId!=currentQuestion["id"]){
-            //load display side
+            document.querySelector("#question-image-tag").src = currentQuestion["img"]
+            document.querySelector("#question-value").textContent = currentQuestion["value"]
+            createOptionsButtons()
 
-            //load options with id
-            createOptions()
-            submitted = false
-        }
+            lastQuestionId = currentQuestion["id"]
+            console.log("done displaying question")
+        })
+        
     }
 }
 
-function createOptionsButtons(options) {
-
+function createOptionsButtons() {
+    let options=currentQuestion["options"]
+    let numOptions=options.length
+    let optionsDisplay=document.querySelector("#options-display")
+    optionsDisplay.innerHTML=""
+    let maxHeight=optionsDisplay.clientHeight
+    let eachOptionHeight=maxHeight*0.8/numOptions
+    for(let i=0;i<numOptions;i++){
+        let newButton=document.createElement("button")
+        newButton.classList.add("option-button")
+        newButton.dataset.id=options[i]["id"]
+        newButton.textContent=options[i]["value"]
+        newButton.style.height=eachOptionHeight+"px"
+        optionsDisplay.append(newButton)
+    }
+    console.log("options created!!")
 }
 
-function defaultView(){
-
+function defaultView() {
+    document.querySelector("#question-image-tag").src = ""
+    document.querySelector("#question-image").style.display="none"
+    document.querySelector("#question-value").textContent = "Awaiting owner to send a question..."
+    document.querySelector("#options-display").innerHTML = ""
 }
 
 function updateRoomBanner() {
     document.querySelector("#displayed-code").textContent = roomCode
     document.querySelector("#room-topic-display").textContent = roomTopic
-    document.querySelector("#name-display").textContent = roomTopic
+    document.querySelector("#name-display").textContent = userName
 }
 
 function updateChat() {

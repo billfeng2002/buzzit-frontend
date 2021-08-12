@@ -36,6 +36,7 @@ function userRoomView() {
     hideAllUIExcept("room-view")
     document.querySelector("#question-view").style.visibility="visible"
     document.querySelector("#room-owner-view").style.visibility="hidden"
+    getAndUseUserRoomInfo()
     //setInterval(updateChat,500)
     updateChat()
 }

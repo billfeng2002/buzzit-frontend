@@ -144,6 +144,7 @@ function processNewUserSubmit(e) {
         fetch("http://127.0.0.1:3000/users", fetchOptions).then(r => r.json()).then(j => {
             if (j["message"] == "user created") {
                 userId = j["user_id"]
+                userName=user_name
                 userRoomView()
             } else {
                 e.target.querySelector("#name-input").readOnly = false;
@@ -191,6 +192,41 @@ function processNewChatMessage(e) {
     
 }
 
+function processNewResponse(e){
+    let target=e.target
+    if(target.matches(".option-button")){
+        //get rid of all other options and disable button
+        let optionsDisplay=document.querySelector("#options-display")
+        let options=optionsDisplay.childNodes
+        
+        let numOptions=options.length
+        for(let i=numOptions-1; i>= 0; i--){
+            if(options[i]!=target){
+                optionsDisplay.removeChild(options[i])
+            }
+        }
+        target.disabled=true
+
+        data={"question_id": lastQuestionId, "user_id": userId, "option_id":target.dataset.id}
+        let postOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                "Accept": 'application/json'
+            },
+            body: JSON.stringify(data)
+        }
+
+        fetch("http://localhost:3000/responses", postOptions).then(r=>r.json()).then(j=>{
+            if(j["message"]=="response submitted"){
+                console.log("response submitted!")
+            }else{
+                alert("response did not save")
+            }
+
+        })
+    }
+}
 
 //listeners
 function createEventListeners() {
@@ -198,6 +234,7 @@ function createEventListeners() {
     document.querySelector("#room-submission-form").addEventListener("submit", processNewOrJoinRoomSubmit)
     document.querySelector("#name-submission-form").addEventListener("submit", processNewUserSubmit)
     document.querySelector("#message-content").addEventListener("keydown", processNewChatMessage)
+    document.querySelector("#options-display").addEventListener("click", processNewResponse)
     console.log("event listeners added")
 }
 
