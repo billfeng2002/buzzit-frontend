@@ -19,9 +19,9 @@ function getAndUseOwnerRoomInfo() {
         roomStatus = j["room_status"]
 
         if (roomStatus == "awaiting") {
-            defaultView()
+            document.querySelector("#stop-accepting-responses").disabled=true
         } else if (roomStatus == "accepting") {
-            displayQuestion()
+            document.querySelector("#stop-accepting-responses").disabled=false
         }
     })
 }
@@ -69,5 +69,31 @@ function updateRoomSettings() {
 }
 
 function updateQuestionResults(){
-    
+    fetch("http://localhost:3000/question_stats/"+roomId).then(r=>r.json()).then(j=>{
+        if(j["error"]){
+
+        }else{
+            let options=j["options"]
+            let numOptions=options.length
+            document.querySelector("#question-display-1").textContent=j["value"]
+            document.querySelector("#question-stats-question-label").textContent=j["value"]
+            document.querySelector("#num-responded").textContent=j["num_responded"]
+            document.querySelector("#percent-correct").textContent=j["percent_correct"]
+            document.querySelector("#percent-responded").textContent=j["percent_responded"]
+            let optionsDistributionDisplay=document.querySelector("#option-distribution")
+            let optionsContainer=document.querySelector("#options-container-1")
+            optionsDistributionDisplay.innerHTML=""
+            optionsContainer.innerHTML=""
+            for(let i=0; i< numOptions; i++){
+                option=options[i]
+                let containerItem=document.createElement("div")
+                containerItem.textContent=option["value"]
+                optionsContainer.append(containerItem)
+
+                let distributionItem=document.createElement("p")
+                distributionItem.textContent=option["distribution"]+" - "+option["value"]
+                optionsDistributionDisplay.append(distributionItem)
+            }
+        }
+    })
 }

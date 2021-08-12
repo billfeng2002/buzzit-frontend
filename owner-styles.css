@@ -196,9 +196,23 @@ hr{
 
 #results-box{
     padding: 20px;
+    overflow-y: auto;
+    width: 100%
 }
 
-#question-literal-label{
-    padding: 0;
-    margin: 0;
+#delete-room-button{
+    position: absolute;
+    bottom: 20px;
+    background-color: red;
+    width: 200px;
+    height: 50px;
+}
+
+#option-distribution p{
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 20px;
+}
+#question-stats-question-label{
+    margin-bottom: 0px;
 }

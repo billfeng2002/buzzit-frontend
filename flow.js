@@ -374,6 +374,30 @@ function processStartAwait(e){
     updateRoomSettings()
 }
 
+function processUpdateRoomTopic(e){
+    e.preventDefault()
+    let newTopic=e.target.querySelector("#new-topic-input").value
+    roomTopic=newTopic
+    updateRoomSettings()
+    updateRoomBanner()
+    e.target.reset()
+}
+
+function processDeleteRoom(e){
+    deleteOptions = {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            "Accept": 'application/json'
+        }
+    }
+    fetch("http://localhost:3000/rooms/"+roomId, deleteOptions).then(r=>r.json()).then(j=>{
+        alert("room deleted")
+    }).catch(()=>{
+        alert("failed to delete room")
+    })
+}
+
 //listeners
 function createEventListeners() {
     document.querySelector("#room-options").addEventListener("click", processMainPageClick)
@@ -385,6 +409,8 @@ function createEventListeners() {
     document.querySelector("#create-question-form").addEventListener("submit", processNewQuestion)
     document.querySelector("#table-options").addEventListener("click", processAddorRemoveOptions)
     document.querySelector("#stop-accepting-responses").addEventListener("click", processStartAwait)
+    document.querySelector("#update-room-topic").addEventListener("submit", processUpdateRoomTopic)
+    document.querySelector("#delete-room-button").addEventListener("click", processDeleteRoom)
     console.log("event listeners added")
 }
 
@@ -411,4 +437,4 @@ function processLoop() {
 setInterval(processLoop, 1000)
 processLoop()
 createEventListeners()
-ownerRoomView()
+//ownerRoomView()

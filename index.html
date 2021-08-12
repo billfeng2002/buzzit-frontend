@@ -120,15 +120,10 @@
                 <div id="current-question">
                     <h3 id="current-question-label"> Current Question</h3>
                     <h5><strong>Question</strong></h5>
-                    <p>This is the question?</p>
+                    <p id="question-display-1"></p>
                     <h5><strong>Options</strong></h5>
-                    <div class="spread-box">
-                        <div>yes</div>
-                        <div>yes</div>
-                        <div>yes</div>
-                        <div>yes</div>
-                        <div>yes</div>
-                        <div>yes</div>
+                    <div id="options-container-1" class="spread-box">
+                        
                     </div>
                     <button id="stop-accepting-responses"> Stop Accepting Responses </button>
                 </div>
@@ -140,30 +135,31 @@
                 <div id="results" class="inset-border">
                     <h4 class="owner-label" id="question-results-label"> Question Results</h4>
                     <div id="results-box">
-                        <h3 id="question-literal-label">Question: </h3>
-                        <p>Filler Question I guess?</p>
+                        <h4 id="question-stats-question-label"></h4>
                         <div id="option-distribution">
-                            <p> 4/12 - Blue</p>
-                            <p> 5/12 - Green</p>
+                            
                         </div>
                         <div id="general-stats">
-                            Number Responded:
-                            Percent Correct:
-                            Percent Responded:
+                            Number Responded: <span id="num-responded"></span>
+                            <br>
+                            Percent Correct: <span id="percent-correct"></span>
+                            <br>
+                            Percent Responded: <span id="percent-responded"></span> 
                         </div>
                     </div>
                 </div>
 
                 <div id="control-panel" class="inset-border">
                     <h4 class="owner-label" id="control-panel-label"> Control Panel </h4>
-                    <h4> Room Status: <span>Awaiting Question</span></h4>
+                    <h4> Room Status: <span id="room-status-display">Awaiting Question</span></h4>
                     <form id="update-room-topic">
                         <label>New Topic</label>
-                        <input type="text">
+                        <br>
+                        <input id="new-topic-input" type="text" maxlength="90">
 
                         <input type="submit", value="update">
                     </form>
-                    <button> Delete Room </button>
+                    <button id="delete-room-button"> Delete Room </button>
                 </div>
             </div>
 
