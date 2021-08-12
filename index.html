@@ -8,7 +8,7 @@
     <script src="globvars.js" defer></script>
     <script src="views.js" defer></script>
     <script src="user_room.js" defer></script>
-    <script src="listener_processors.js" defer></script>
+    <script src="owner_room.js" defer></script>
     <script src="flow.js" defer></script>
 </head>
 
@@ -66,7 +66,7 @@
         </div>
 
         <div id="room-owner-view">
-            <div id="question-creation-form">
+            <div id="question-creation-form" class="inset-border">
                 <h4 class="owner-label" id="create-question-label"> Create a Question</h4>
                 <div id="create-question">
 
@@ -75,7 +75,7 @@
             </div>
 
             <div id="results-and-control-panel">
-                <div id="results">
+                <div id="results" class="inset-border">
                     <h4 class="owner-label" id="question-results-label"> Question Results</h4>
                     <div id="results-box">
                         <div id="summary-stats">
@@ -87,23 +87,18 @@
                     </div>
                 </div>
 
-                <div id="control-panel">
+                <div id="control-panel" class="inset-border">
                     <h4 class="owner-label" id="control-panel-label"> Control Panel </h4>
                     <h4> Room Status: <span>Awaiting Question</span></h4>
 
                 </div>
             </div>
 
-            <div id="member-management-view">
+            <div id="member-management-view" class="inset-border">
                 <h4 class="owner-label" id="member-management-label"> Member Management </h4>
+                
                 <div id="members">
-                    <div class="member" dataset-id="1">1/16 -<span class="kick-member">❌</span> Bob</div>
-                    <div class="member" dataset-id="1">1/16 -<span class="kick-member">❌</span> Bob</div>
-                    <div class="member" dataset-id="1">1/16 -<span class="kick-member">❌</span> Bob</div>
-                    <div class="member" dataset-id="1">1/16 -<span class="kick-member">❌</span> Bob</div>
-                    <div class="member" dataset-id="1">1/16 -<span class="kick-member">❌</span> Bob</div>
-                    <div class="member" dataset-id="1">1/16 -<span class="kick-member">❌</span> Bob</div>
-                    <div class="member" dataset-id="1">1/16 -<span class="kick-member">❌</span> Bob</div>
+                    <p id="member-count-display">X Users</p>
                     <div class="member" dataset-id="1">1/16 -<span class="kick-member">❌</span> Bob</div>
                     <div class="member" dataset-id="1">1/16 -<span class="kick-member">❌</span> Bob</div>
                     <div class="member" dataset-id="1">1/16 -<span class="kick-member">❌</span> Bob</div>
@@ -113,7 +108,7 @@
             </div>
         </div>
 
-        <div id="chat-view">
+        <div id="chat-view" class="inset-border">
             <div id="messages">
                 <div id="messages-box">
                     

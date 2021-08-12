@@ -29,7 +29,7 @@ function processNewOrJoinRoomSubmit(e) {
     e.preventDefault()
     if (isOwner) {
         e.target.querySelector("#room-code-input").readOnly = true;
-        e.target.querySelector('#room-code-submit').value = "Searching";
+        e.target.querySelector('#room-code-submit').value = "Working";
         e.target.querySelector('#room-code-submit').disabled = true;
 
         console.log("submitted")

@@ -6,6 +6,10 @@ function getAndUseUserRoomInfo() {
             location.reload()
             return false
         }
+        if(!j["users"].includes(userId)){
+            location.reload()
+            return false
+        }
         if (roomTopic != j["room_topic"]) {
             roomTopic = j["room_topic"]
             updateRoomBanner()

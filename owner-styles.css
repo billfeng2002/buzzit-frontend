@@ -66,4 +66,18 @@ div#room-owner-view{
     margin: 0;
     padding-top: 10px;
     padding-bottom: 10px;
+    outline: 2px solid black;
+    outline-offset: -2px;
+}
+
+.inset-border{
+    outline: 2px solid black;
+    outline-offset: -2px;
+}
+
+#member-count-display{
+    padding:0px;
+    margin: 0px;
+    text-align: center;
+    width: 100%
 }
