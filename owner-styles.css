@@ -43,7 +43,7 @@ div#room-owner-view{
 #results{
     height:50%;
     width: 100%;
-    background-color: darkgreen;
+    background-color: rgb(255, 255, 255);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -52,7 +52,7 @@ div#room-owner-view{
 #control-panel{
     height:50%;
     width: 100%;
-    background-color: darkblue;
+    background-color: rgb(255, 255, 255);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -154,4 +154,51 @@ div#room-owner-view{
     margin: auto;
     width: 200px;
     text-align: center;
+}
+
+#current-question{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#current-question-label{
+    padding: 0;
+    margin: 0;
+}
+
+#question-creation-form{
+    overflow-y: auto;
+}
+
+#stop-accepting-responses{
+    margin: auto;
+}
+
+.spread-box{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.spread-box div{
+    margin: 10px;
+    padding: 3px;
+    border: 2px solid black;
+}
+
+hr{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#results-box{
+    padding: 20px;
+}
+
+#question-literal-label{
+    padding: 0;
+    margin: 0;
 }

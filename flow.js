@@ -231,7 +231,7 @@ function processNewResponse(e) {
 function processDeleteUser(e) {
     let target = e.target
     if (target.matches(".kick-member")) {
-        userId = target.dataset.id
+        let userId = target.dataset.id
         deleteOptions = {
             method: 'DELETE',
             headers: {
@@ -280,6 +280,9 @@ function processNewQuestion(e) {
     fetch("http://localhost:3000/questions", postOptions).then(r => r.json()).then(j => {
         if (j["message"] == "success") {
             currentQuestion["id"] = j["question_id"]
+            currentQuestion["value"]=questionVal
+            currentQuestion["img"]=image
+            currentQuestion["options"]=options
             roomStatus="accepting"
             updateRoomSettings()
             resetNewQuestionForm()
@@ -340,30 +343,35 @@ function resetNewQuestionForm() {
 
 }
 
-function updateRoomSettings() {
-    data = {
-        "current_question_id": currentQuestion["id"],
-        "topic": roomTopic,
-        "status": roomStatus
+function processAddorRemoveOptions(e) {
+    if(e.target.matches("#add-option")){
+        let table=document.querySelector("#options-table")
+        let numOptions=table.querySelectorAll(".option-row").length
+        if(numOptions>=10){
+            return;
+        }
+        let newRow=document.createElement("tr")
+        newRow.classList.add("option-row")
+        newRow.innerHTML=`<td>${numOptions+1}</td>
+                            <td><input type="text"></td>
+                            <td><input type="checkbox"></td>`
+                    
+        table.append(newRow)
     }
-    let patchOptions = {
-        method: 'PATCH',
-        headers: {
-            'Content-Type': 'application/json',
-            "Accept": 'application/json'
-        },
-        body: JSON.stringify(data)
+    if(e.target.matches("#remove-option")){
+        let table=document.querySelector("#options-table")
+        let options=table.querySelectorAll(".option-row")
+        let numOptions=options.length
+        if(numOptions>0){
+            options[numOptions-1].remove()
+        }
     }
-
-    fetch("http://localhost:3000/rooms/" + roomId, patchOptions).then(r => r.json()).then(j => {
-
-    }).catch(() => {
-        alert("room update failed")
-    })
 }
 
-function processAddorRemoveOptions(e) {
-
+function processStartAwait(e){
+    e.target.disabled=true
+    roomStatus="awaiting"
+    updateRoomSettings()
 }
 
 //listeners
@@ -376,6 +384,7 @@ function createEventListeners() {
     document.querySelector("#members").addEventListener("click", processDeleteUser)
     document.querySelector("#create-question-form").addEventListener("submit", processNewQuestion)
     document.querySelector("#table-options").addEventListener("click", processAddorRemoveOptions)
+    document.querySelector("#stop-accepting-responses").addEventListener("click", processStartAwait)
     console.log("event listeners added")
 }
 
@@ -397,17 +406,9 @@ function processLoop() {
         } else if (appLocation == "owner-room-view") {
             ownerRoomView()
         }
-    } else {
-        if (appLocation == "user-room-view") {
-
-        } else if (appLocation == "owner-room-view") {
-
-        }
     }
-
-
 }
 setInterval(processLoop, 1000)
 processLoop()
 createEventListeners()
-//ownerRoomView()
+ownerRoomView()

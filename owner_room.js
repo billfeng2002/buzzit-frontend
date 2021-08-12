@@ -45,3 +45,29 @@ function updateUserList(){
 
     })
 }
+
+function updateRoomSettings() {
+    data = {
+        "current_question_id": currentQuestion["id"],
+        "topic": roomTopic,
+        "status": roomStatus
+    }
+    let patchOptions = {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            "Accept": 'application/json'
+        },
+        body: JSON.stringify(data)
+    }
+
+    fetch("http://localhost:3000/rooms/" + roomId, patchOptions).then(r => r.json()).then(j => {
+
+    }).catch(() => {
+        alert("room update failed")
+    })
+}
+
+function updateQuestionResults(){
+    
+}
