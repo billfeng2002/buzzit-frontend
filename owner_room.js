@@ -1,5 +1,5 @@
 function getAndUseOwnerRoomInfo() {
-    fetch("http://localhost:3000/owner_room_info/" + roomId).then(r => r.json()).then(j => {
+    fetch(backend_path+"owner_room_info/" + roomId).then(r => r.json()).then(j => {
 
         if(j["status"]=="closed room"){
             location.reload()
@@ -27,7 +27,7 @@ function getAndUseOwnerRoomInfo() {
 }
 
 function updateUserList(){
-    fetch("http://localhost:3000/member_list/"+roomId).then(r=>r.json()).then(j=>{ //don't include owner
+    fetch(backend_path+"member_list/"+roomId).then(r=>r.json()).then(j=>{ //don't include owner
         let memberCount=j["count"]
         if(!memberCount){
             memberCount=0
@@ -61,7 +61,7 @@ function updateRoomSettings() {
         body: JSON.stringify(data)
     }
 
-    fetch("http://localhost:3000/rooms/" + roomId, patchOptions).then(r => r.json()).then(j => {
+    fetch(backend_path+"rooms/" + roomId, patchOptions).then(r => r.json()).then(j => {
 
     }).catch(() => {
         alert("room update failed")
@@ -69,7 +69,7 @@ function updateRoomSettings() {
 }
 
 function updateQuestionResults(){
-    fetch("http://localhost:3000/question_stats/"+roomId).then(r=>r.json()).then(j=>{
+    fetch(backend_path+"question_stats/"+roomId).then(r=>r.json()).then(j=>{
         if(j["error"]){
 
         }else{

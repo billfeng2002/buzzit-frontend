@@ -1,6 +1,6 @@
 function getAndUseUserRoomInfo() {
     //need room status, topic, question id
-    fetch("http://localhost:3000/user_room_info/" + roomId).then(r => r.json()).then(j => {
+    fetch(backend_path+"user_room_info/" + roomId).then(r => r.json()).then(j => {
 
         if(j["status"]=="closed room"){
             location.reload()
@@ -34,7 +34,7 @@ function displayQuestion() {
     }
     if (lastQuestionId != currentQuestion["id"]) {
         
-        fetch("http://localhost:3000/questions/"+currentQuestion["id"]).then(r=>r.json()).then(j=>{
+        fetch(backend_path+"questions/"+currentQuestion["id"]).then(r=>r.json()).then(j=>{
             if(j["img"]){
                 currentQuestion["img"]=j["img"]
                 document.querySelector("#question-image").style.display="flex"
@@ -93,7 +93,7 @@ function updateRoomBanner() {
 
 function updateChat() {
     let messageBox = document.querySelector("#messages-box")
-    fetch("http://localhost:3000/messages/" + roomId).then(r => r.json()).then(j => {
+    fetch(backend_path+"messages/" + roomId).then(r => r.json()).then(j => {
         if (!j["last_message_id"]) {
             return; //no new messages
         }

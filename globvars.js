@@ -15,3 +15,4 @@ let currentQuestion = {
 }
 let lastQuestionId=0
 let isOwner = false
+const backend_path="https://buzzit-backend.herokuapp.com/"

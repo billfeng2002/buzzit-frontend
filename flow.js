@@ -43,7 +43,7 @@ function processNewOrJoinRoomSubmit(e) {
             },
             body: JSON.stringify({ "room_code": roomCode })
         }
-        fetch("http://127.0.0.1:3000/rooms", fetchOptions).then(r => r.json()).then(j => {
+        fetch(backend_path+"rooms", fetchOptions).then(r => r.json()).then(j => {
             if (j["message"] == "room created") {
                 roomId = j["room_id"]
                 newUserView()
@@ -76,7 +76,7 @@ function processNewOrJoinRoomSubmit(e) {
             },
             body: JSON.stringify({ "room_code": roomCode })
         }
-        fetch("http://127.0.0.1:3000/check_room_exists", fetchOptions).then(r => r.json()).then(j => {
+        fetch(backend_path+"check_room_exists", fetchOptions).then(r => r.json()).then(j => {
             if (j["message"] == "found") {
                 roomId = j["room_id"]
                 newUserView()
@@ -114,7 +114,7 @@ function processNewUserSubmit(e) {
             },
             body: JSON.stringify({ "room_id": roomId, "name": user_name, "owner": true })
         }
-        fetch("http://127.0.0.1:3000/users", fetchOptions).then(r => r.json()).then(j => {
+        fetch(backend_path+"users", fetchOptions).then(r => r.json()).then(j => {
             if (j["message"] == "user created") {
                 userId = j["user_id"]
                 userName = user_name
@@ -141,7 +141,7 @@ function processNewUserSubmit(e) {
             },
             body: JSON.stringify({ "room_id": roomId, "name": user_name })
         }
-        fetch("http://127.0.0.1:3000/users", fetchOptions).then(r => r.json()).then(j => {
+        fetch(backend_path+"users", fetchOptions).then(r => r.json()).then(j => {
             if (j["message"] == "user created") {
                 userId = j["user_id"]
                 userName = user_name
@@ -180,7 +180,7 @@ function processNewChatMessage(e) {
             body: JSON.stringify(data)
         }
         e.target.value = ""
-        fetch("http://localhost:3000/messages", fetchOptions).then(r => r.json()).then(j => {
+        fetch(backend_path+"messages", fetchOptions).then(r => r.json()).then(j => {
             if (j["message"] == "message sent") {
                 updateChat()
             } else {
@@ -217,7 +217,7 @@ function processNewResponse(e) {
             body: JSON.stringify(data)
         }
 
-        fetch("http://localhost:3000/responses", postOptions).then(r => r.json()).then(j => {
+        fetch(backend_path+"responses", postOptions).then(r => r.json()).then(j => {
             if (j["message"] == "response submitted") {
                 console.log("response submitted!")
             } else {
@@ -239,7 +239,7 @@ function processDeleteUser(e) {
                 "Accept": 'application/json'
             }
         }
-        fetch("http://localhost:3000/users/" + userId, deleteOptions).then(r => r.json()).then(j => {
+        fetch(backend_path+"users/" + userId, deleteOptions).then(r => r.json()).then(j => {
             updateUserList()
             console.log("user deleted")
         }).catch(() => {
@@ -277,7 +277,7 @@ function processNewQuestion(e) {
         body: JSON.stringify(data)
     }
 
-    fetch("http://localhost:3000/questions", postOptions).then(r => r.json()).then(j => {
+    fetch(backend_path+"questions", postOptions).then(r => r.json()).then(j => {
         if (j["message"] == "success") {
             currentQuestion["id"] = j["question_id"]
             currentQuestion["value"] = questionVal
@@ -393,7 +393,7 @@ function processDeleteRoom(e) {
             "Accept": 'application/json'
         }
     }
-    fetch("http://localhost:3000/rooms/" + roomId, deleteOptions).then(r => r.json()).then(j => {
+    fetch(backend_path+"rooms/" + roomId, deleteOptions).then(r => r.json()).then(j => {
         alert("room deleted")
     }).catch(() => {
         alert("failed to delete room")
