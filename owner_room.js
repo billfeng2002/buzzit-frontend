@@ -6,6 +6,7 @@ function getAndUseOwnerRoomInfo() {
             return false
         }
         if(!j["users"].includes(userId)){
+            debugger
             location.reload()
             return false
         }
@@ -28,6 +29,9 @@ function getAndUseOwnerRoomInfo() {
 function updateUserList(){
     fetch("http://localhost:3000/member_list/"+roomId).then(r=>r.json()).then(j=>{ //don't include owner
         let memberCount=j["count"]
+        if(!memberCount){
+            memberCount=0
+        }
         let members=j["members"] //{score: , name:, id:}
         let memberDisplay=document.querySelector("#members")
         memberDisplay.innerHTML=`<p id="member-count-display">${memberCount} Users</p>`

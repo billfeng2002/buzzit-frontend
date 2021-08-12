@@ -61,6 +61,10 @@ function createOptionsButtons() {
     let numOptions=options.length
     let optionsDisplay=document.querySelector("#options-display")
     optionsDisplay.innerHTML=""
+    if(numOptions==0){
+        console.log("no options")
+        return
+    }
     let maxHeight=optionsDisplay.clientHeight
     let eachOptionHeight=maxHeight*0.8/numOptions
     for(let i=0;i<numOptions;i++){

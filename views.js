@@ -47,6 +47,9 @@ function ownerRoomView() {
     document.querySelector("#question-view").style.visibility="hidden"
     document.querySelector("#room-owner-view").style.visibility="visible"
     updateUserList()
+    getAndUseOwnerRoomInfo()
+    setInterval(getAndUseOwnerRoomInfo, 1000)
+    setInterval(updateUserList,1000)
     setInterval(updateChat,1000)
     updateChat()
 }

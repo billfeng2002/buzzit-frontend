@@ -81,3 +81,77 @@ div#room-owner-view{
     text-align: center;
     width: 100%
 }
+
+.kick-member{
+    cursor: pointer
+}
+
+#create-question{
+    padding: 10px;
+}
+
+#question-label-and-input-container{
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#form-question-label{
+    padding-right: 20px;
+}
+
+#form-question-input{
+    width: 100%;
+    overflow-y: auto;
+    resize: none;
+}
+
+#image-label-and-input-container{
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#form-image-label{
+    padding-right: 10px;
+}
+
+#form-image-input{
+    width: 80%;
+    margin-left: 10%;
+}
+
+#form-options-label{
+    text-align: center;
+    margin: auto;
+    display: block;
+}
+
+#options-table{
+    width: 100%
+}
+
+#table-options{
+    display:flex;
+    width: 100%;
+    justify-content: center;
+}
+#add-option{
+    margin-right: 20px;
+    cursor: pointer;
+}
+#remove-option{
+    margin-left: 20px;
+    cursor: pointer;
+}
+#submit-question-button{
+    width: 200px;
+    margin: auto;
+}
+#submit-container{
+    margin: auto;
+    width: 200px;
+    text-align: center;
+}

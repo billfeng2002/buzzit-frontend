@@ -67,10 +67,63 @@
 
         <div id="room-owner-view">
             <div id="question-creation-form" class="inset-border">
-                <h4 class="owner-label" id="create-question-label"> Create a Question</h4>
+                <h4 class="owner-label" id="create-question-label"> Create/Manage Question</h4>
                 <div id="create-question">
+                    <form id="create-question-form">
+                        <div id="question-label-and-input-container">
+                            <label id="form-question-label">Question</label>
+                            <textarea id="form-question-input" placeholder="How many people are there on Earth?"
+                                maxlength="80"></textarea>
+                        </div>
+                        <br>
+                        <div id="image-label-and-input-container">
+                            <label id="form-image-label">Image url (optional)</label>
+                            <input id="form-image-input" type="text">
+                        </div>
+                        <br>
 
+                        <table id="options-table">
+                            <label id="form-options-label">Options</label>
+                            <tr>
+                                <th>Option #</th>
+                                <th>Option Value</th>
+                                <th>is correct?</th>
+                            </tr>
+                            <tr class="option-row">
+                                <td>1</td>
+                                <td><input type="text"></td>
+                                <td><input type="checkbox"></td>
+                            </tr>
+                            <tr class="option-row">
+                                <td>2</td>
+                                <td><input type="text"></td>
+                                <td><input type="checkbox"></td>
+                            </tr>
+                            <tr class="option-row">
+                                <td>3</td>
+                                <td><input type="text"></td>
+                                <td><input type="checkbox"></td>
+                            </tr>
+                            <tr class="option-row">
+                                <td>4</td>
+                                <td><input type="text"></td>
+                                <td><input type="checkbox"></td>
+                            </tr>
+                        </table>
+                        <p id="table-options"> <span id="add-option">➕</span><span id="remove-option">➖</span> </p>
+                        <div id="submit-container">
+                            <input id="submit-question-button" type="submit" value="Post Question">
+                        </div>
+                    </form>
                 </div>
+                <hr>
+                <div id="current-question">
+                    <h3> Current Question</h3>
+                    <div>Question: </div>
+                    <div>Options: </div>
+                </div>
+                <button id="stop-accepting-responses"> Stop Accepting Responses </button>
+
 
             </div>
 
@@ -96,7 +149,7 @@
 
             <div id="member-management-view" class="inset-border">
                 <h4 class="owner-label" id="member-management-label"> Member Management </h4>
-                
+
                 <div id="members">
                     <p id="member-count-display">X Users</p>
                     <div class="member" dataset-id="1">1/16 -<span class="kick-member">❌</span> Bob</div>
@@ -111,7 +164,7 @@
         <div id="chat-view" class="inset-border">
             <div id="messages">
                 <div id="messages-box">
-                    
+
                 </div>
             </div>
             <div id="chat">
@@ -125,5 +178,3 @@
 
 
 </body>
-
-

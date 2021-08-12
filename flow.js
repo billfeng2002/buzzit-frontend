@@ -102,7 +102,7 @@ function processNewUserSubmit(e) {
     e.target.querySelector("#name-input").readOnly = true;
     e.target.querySelector('#name-submit').value = "Working...";
     e.target.querySelector('#name-submit').disabled = true;
-    
+
     console.log("submitted")
     user_name = e.target.querySelector("#name-input").value
     if (isOwner) {
@@ -112,12 +112,12 @@ function processNewUserSubmit(e) {
                 'Content-Type': 'application/json',
                 "Accept": 'application/json'
             },
-            body: JSON.stringify({ "room_id": roomId, "name":user_name, "owner":true})
+            body: JSON.stringify({ "room_id": roomId, "name": user_name, "owner": true })
         }
         fetch("http://127.0.0.1:3000/users", fetchOptions).then(r => r.json()).then(j => {
             if (j["message"] == "user created") {
                 userId = j["user_id"]
-                userName=user_name
+                userName = user_name
                 ownerRoomView()
             } else {
                 e.target.querySelector("#name-input").readOnly = false;
@@ -139,12 +139,12 @@ function processNewUserSubmit(e) {
                 'Content-Type': 'application/json',
                 "Accept": 'application/json'
             },
-            body: JSON.stringify({ "room_id": roomId, "name":user_name})
+            body: JSON.stringify({ "room_id": roomId, "name": user_name })
         }
         fetch("http://127.0.0.1:3000/users", fetchOptions).then(r => r.json()).then(j => {
             if (j["message"] == "user created") {
                 userId = j["user_id"]
-                userName=user_name
+                userName = user_name
                 userRoomView()
             } else {
                 e.target.querySelector("#name-input").readOnly = false;
@@ -163,14 +163,14 @@ function processNewUserSubmit(e) {
 }
 
 function processNewChatMessage(e) {
-    let enterKeycode=13
-    if(e.keyCode==enterKeycode){
+    let enterKeycode = 13
+    if (e.keyCode == enterKeycode) {
         e.preventDefault()
         console.log(e.target.value)
-        if(e.target.value==""){
+        if (e.target.value == "") {
             return
         }
-        data={"room_id": roomId, "user_id": userId, "value":e.target.value}
+        data = { "room_id": roomId, "user_id": userId, "value": e.target.value }
         let fetchOptions = {
             method: 'POST',
             headers: {
@@ -179,35 +179,35 @@ function processNewChatMessage(e) {
             },
             body: JSON.stringify(data)
         }
-        e.target.value=""
-        fetch("http://localhost:3000/messages", fetchOptions).then(r=> r.json()).then(j=>{
-            if(j["message"]=="message sent"){
+        e.target.value = ""
+        fetch("http://localhost:3000/messages", fetchOptions).then(r => r.json()).then(j => {
+            if (j["message"] == "message sent") {
                 updateChat()
-            }else{
+            } else {
                 alert("Message failed to send. Check your connection with the server.")
             }
         })
     }
 
-    
+
 }
 
-function processNewResponse(e){
-    let target=e.target
-    if(target.matches(".option-button")){
+function processNewResponse(e) {
+    let target = e.target
+    if (target.matches(".option-button")) {
         //get rid of all other options and disable button
-        let optionsDisplay=document.querySelector("#options-display")
-        let options=optionsDisplay.childNodes
-        
-        let numOptions=options.length
-        for(let i=numOptions-1; i>= 0; i--){
-            if(options[i]!=target){
+        let optionsDisplay = document.querySelector("#options-display")
+        let options = optionsDisplay.childNodes
+
+        let numOptions = options.length
+        for (let i = numOptions - 1; i >= 0; i--) {
+            if (options[i] != target) {
                 optionsDisplay.removeChild(options[i])
             }
         }
-        target.disabled=true
+        target.disabled = true
 
-        data={"question_id": lastQuestionId, "user_id": userId, "option_id":target.dataset.id}
+        data = { "question_id": lastQuestionId, "user_id": userId, "option_id": target.dataset.id }
         let postOptions = {
             method: 'POST',
             headers: {
@@ -217,15 +217,153 @@ function processNewResponse(e){
             body: JSON.stringify(data)
         }
 
-        fetch("http://localhost:3000/responses", postOptions).then(r=>r.json()).then(j=>{
-            if(j["message"]=="response submitted"){
+        fetch("http://localhost:3000/responses", postOptions).then(r => r.json()).then(j => {
+            if (j["message"] == "response submitted") {
                 console.log("response submitted!")
-            }else{
+            } else {
                 alert("response did not save")
             }
 
         })
     }
+}
+
+function processDeleteUser(e) {
+    let target = e.target
+    if (target.matches(".kick-member")) {
+        userId = target.dataset.id
+        deleteOptions = {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                "Accept": 'application/json'
+            }
+        }
+        fetch("http://localhost:3000/users/" + userId, deleteOptions).then(r => r.json()).then(j => {
+            updateUserList()
+            console.log("user deleted")
+        }).catch(() => {
+            alert("failed to delete user")
+        })
+    }
+}
+
+function processNewQuestion(e) {
+    e.preventDefault()
+    let questionVal = e.target.querySelector("#form-question-input").value
+    let image = e.target.querySelector("#form-image-input").value
+    let options = []
+    let optionNodes = e.target.querySelectorAll(".option-row")
+    let numOptions = optionNodes.length
+
+    for (let i = 0; i < numOptions; i++) {
+        let value = optionNodes[i].querySelector("input[type='text']").value
+        let checked = optionNodes[i].querySelector("input[type='checkbox']").checked
+        options.push({ "value": value, "is_correct": checked })
+    }
+    data = {
+        "value": questionVal,
+        "image_url": image,
+        "room_id": roomId,
+        "options": options
+    }
+
+    let postOptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            "Accept": 'application/json'
+        },
+        body: JSON.stringify(data)
+    }
+
+    fetch("http://localhost:3000/questions", postOptions).then(r => r.json()).then(j => {
+        if (j["message"] == "success") {
+            currentQuestion["id"] = j["question_id"]
+            roomStatus="accepting"
+            updateRoomSettings()
+            resetNewQuestionForm()
+            document.querySelector("#stop-accepting-responses").disabled=false
+        } else {
+            alert("question creation failed")
+        }
+    }).catch(() => {
+        alert("question failed to save")
+    })
+}
+
+function resetNewQuestionForm() {
+    document.querySelector("#create-question-form").innerHTML = `<div id="question-label-and-input-container">
+    <label id="form-question-label">Question</label>
+    <textarea id="form-question-input" placeholder="How many people are there on Earth?"
+        maxlength="80"></textarea>
+</div>
+<br>
+<div id="image-label-and-input-container">
+    <label id="form-image-label">Image url (optional)</label>
+    <input id="form-image-input" type="text">
+</div>
+<br>
+
+<table id="options-table">
+    <label id="form-options-label">Options</label>
+    <tr>
+        <th>Option #</th>
+        <th>Option Value</th>
+        <th>is correct?</th>
+    </tr>
+    <tr class="option-row">
+        <td>1</td>
+        <td><input type="text"></td>
+        <td><input type="checkbox"></td>
+    </tr>
+    <tr class="option-row">
+        <td>2</td>
+        <td><input type="text"></td>
+        <td><input type="checkbox"></td>
+    </tr>
+    <tr class="option-row">
+        <td>3</td>
+        <td><input type="text"></td>
+        <td><input type="checkbox"></td>
+    </tr>
+    <tr class="option-row">
+        <td>4</td>
+        <td><input type="text"></td>
+        <td><input type="checkbox"></td>
+    </tr>
+</table>
+<p id="table-options"> <span id="add-option">➕</span><span id="remove-option">➖</span> </p>
+<div id="submit-container">
+    <input id="submit-question-button" type="submit" value="Post Question">
+</div>`
+
+}
+
+function updateRoomSettings() {
+    data = {
+        "current_question_id": currentQuestion["id"],
+        "topic": roomTopic,
+        "status": roomStatus
+    }
+    let patchOptions = {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            "Accept": 'application/json'
+        },
+        body: JSON.stringify(data)
+    }
+
+    fetch("http://localhost:3000/rooms/" + roomId, patchOptions).then(r => r.json()).then(j => {
+
+    }).catch(() => {
+        alert("room update failed")
+    })
+}
+
+function processAddorRemoveOptions(e) {
+
 }
 
 //listeners
@@ -235,6 +373,9 @@ function createEventListeners() {
     document.querySelector("#name-submission-form").addEventListener("submit", processNewUserSubmit)
     document.querySelector("#message-content").addEventListener("keydown", processNewChatMessage)
     document.querySelector("#options-display").addEventListener("click", processNewResponse)
+    document.querySelector("#members").addEventListener("click", processDeleteUser)
+    document.querySelector("#create-question-form").addEventListener("submit", processNewQuestion)
+    document.querySelector("#table-options").addEventListener("click", processAddorRemoveOptions)
     console.log("event listeners added")
 }
 
@@ -251,15 +392,15 @@ function processLoop() {
             console.log("join new room page loaded")
         } else if (appLocation == "new-user-page") {
             newUserView()
-        } else if (appLocation == "user-room-view"){
+        } else if (appLocation == "user-room-view") {
             userRoomView()
-        } else if (appLocation=="owner-room-view"){
+        } else if (appLocation == "owner-room-view") {
             ownerRoomView()
         }
-    }else{
-        if(appLocation=="user-room-view"){
+    } else {
+        if (appLocation == "user-room-view") {
 
-        } else if (appLocation=="owner-room-view"){
+        } else if (appLocation == "owner-room-view") {
 
         }
     }
@@ -269,3 +410,4 @@ function processLoop() {
 setInterval(processLoop, 1000)
 processLoop()
 createEventListeners()
+//ownerRoomView()
