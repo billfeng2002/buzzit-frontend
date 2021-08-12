@@ -50,6 +50,7 @@ textarea#message-content{
     padding: 10px;
     overflow-wrap: break-word;
     word-wrap: break-word;
+    
 }
 
 /* #messages-box{

@@ -5,5 +5,10 @@ let roomCode = ""
 let appLocation = "main-page"
 let loadedView = false
 let roomStatus = ""
-let currentQuestion = {}
+let lastMessageId=0
+let currentQuestion = {
+    "img":"",
+    "value":"",
+    "options":[]
+}
 let isOwner = false

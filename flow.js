@@ -200,7 +200,15 @@ function processLoop() {
         } else if (appLocation=="owner-room-view"){
             ownerRoomView()
         }
+    }else{
+        if(appLocation=="user-room-view"){
+
+        } else if (appLocation=="owner-room-view"){
+
+        }
     }
+
+
 }
 setInterval(processLoop, 1000)
 processLoop()
