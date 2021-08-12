@@ -22,17 +22,18 @@ function updateChat(){
         if(j["last_message_id"] > lastMessageId){
             let messages=j["messages"] //array of messages
             let totalNumMsg=messages.length
-            for(let i=totalNumMsg-1;i>=0;i--){
+            for(let i=0;i<totalNumMsg;i++){
                 let message=messages[i]
-                if(message["id"]<=lastMessageId){
-                    break;
-                }else{
+                if(message["id"]>lastMessageId){
                     let newNode=document.createElement('div')
                     newNode.classList.add("message")
                     newNode.innerHTML=`<span class="sender"> ${message["author"]}: </span> ${message["value"]}`
                     messageBox.append(newNode)
                 }
             }
+            lastMessageId=j["last_message_id"]
+            var messageCont= document.getElementById("messages");
+            messageCont.scrollTop = messageCont.scrollHeight;
         }
     })
 }

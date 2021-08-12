@@ -162,7 +162,33 @@ function processNewUserSubmit(e) {
 }
 
 function processNewChatMessage(e) {
+    let enterKeycode=13
+    if(e.keyCode==enterKeycode){
+        e.preventDefault()
+        console.log(e.target.value)
+        if(e.target.value==""){
+            return
+        }
+        data={"room_id": roomId, "user_id": userId, "value":e.target.value}
+        let fetchOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                "Accept": 'application/json'
+            },
+            body: JSON.stringify(data)
+        }
+        e.target.value=""
+        fetch("http://localhost:3000/messages", fetchOptions).then(r=> r.json()).then(j=>{
+            if(j["message"]=="message sent"){
+                updateChat()
+            }else{
+                alert("Message failed to send. Check your connection with the server.")
+            }
+        })
+    }
 
+    
 }
 
 function newQuestion(questionInfo) {
@@ -179,6 +205,7 @@ function createEventListeners() {
     document.querySelector("#room-options").addEventListener("click", processMainPageClick)
     document.querySelector("#room-submission-form").addEventListener("submit", processNewOrJoinRoomSubmit)
     document.querySelector("#name-submission-form").addEventListener("submit", processNewUserSubmit)
+    document.querySelector("#message-content").addEventListener("keydown", processNewChatMessage)
     console.log("event listeners added")
 }
 
